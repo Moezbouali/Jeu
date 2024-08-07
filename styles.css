@@ -1,0 +1,122 @@
+/* Général */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #2c2c2c; /* Fond gris foncé */
+    color: #ffffff; /* Texte blanc */
+    margin: 0;
+    padding: 0;
+    text-align: center; /* Centrer tout le texte */
+}
+
+h1 {
+    background-color: #daa520; /* Or (gold) */
+    color: white;
+    padding: 20px;
+    margin: 0;
+}
+
+h2 {
+    color: #daa520; /* Or (gold) */
+    margin-bottom: 5px;
+}
+
+/* Conteneur principal */
+.container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin: 20px;
+}
+
+/* Section des personnages */
+.character {
+    background-color: #424242; /* Gris très foncé */
+    border: 1px solid #daa520; /* Bordure or */
+    border-radius: 5px;
+    padding: 20px;
+    width: 45%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    text-align: center; /* Centrer le contenu */
+    margin: 10px; /* Espacement autour des blocs */
+}
+
+.character img {
+    width: 150px;  /* Largeur des icônes, ajustez selon besoin */
+    height: 200px; /* Hauteur des icônes, ajustez selon besoin */
+    object-fit: cover; /* Ajuste l'image pour couvrir l'espace */
+    display: block; /* Affiche l'image comme un bloc */
+    margin: 0 auto 10px; /* Centre l'image horizontalement et ajoute une marge en bas */
+}
+
+/* Formulaires et boutons */
+form {
+    margin-top: 20px;
+    margin-bottom: 20px; /* Ajoute une marge en bas pour les formulaires */
+}
+
+button {
+    background-color: #daa520; /* Or (gold) */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px 0;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+button:hover {
+    background-color: #b8860b; /* Or foncé */
+}
+
+/* Message */
+.message {
+    background-color: #ffeb3b; /* Jaune */
+    border: 1px solid #ffc107;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 20px;
+    text-align: center;
+    color: #000; /* Texte noir */
+}
+
+/* Tableaux */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+/* Inputs */
+input[type="text"],
+input[type="number"] {
+    padding: 5px;
+    margin: 5px 0;
+}
+
+/* Container pour le bouton */
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.button-container button {
+    padding: 10px 20px;
+    font-size: 16px;
+}

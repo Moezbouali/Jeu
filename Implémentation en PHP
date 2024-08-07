@@ -1,0 +1,145 @@
+<?php
+// Classe de base pour les personnages (Personnage)
+	//	Classes pour les différents types de monstres et héros
+	//	Méthodes pour les actions (rugir, coupdesalete, gifle, coupspecial)
+    //	Classe Personnage : Une classe de base pour tous les personnages avec des attributs communs comme musculation, lachete, inteligence, endurance, et sante.
+	//	Classes Monstre et Hero : Héritent de Personnage et ajoutent des attributs et méthodes spécifiques.
+	//	Classes spécifiques Ogre, Lutin, Chevalier, et Princesse : Héritent de Monstre ou Hero et implémentent les méthodes spécifiques comme rugir, coupDesalete, gifle, et coupspecial.
+	//	Exemple d’utilisation : Un combat entre un Chevalier et un Ogre est simulé en boucle jusqu’à ce que l’un des deux soit mort.
+
+//Ce code fournit une structure de base pour un jeu de tournoi entre monstres et héros. 
+//Vous pouvez étendre cette structure en ajoutant plus de fonctionnalités et de types de personnages selon vos besoins.
+
+// Classe de base pour les personnages
+abstract class Personnage {
+    protected $musculation;
+    protected $lachete;
+    protected $inteligence;
+    protected $endurance;
+    protected $sante;
+
+    public function __construct($musculation, $lachete, $inteligence, $endurance, $sante) {
+        $this->musculation = $musculation;
+        $this->lachete = $lachete;
+        $this->inteligence = $inteligence;
+        $this->endurance = $endurance;
+        $this->sante = $sante;
+    }
+
+    public function estVivant() {
+        return $this->sante > 0;
+    }
+
+    public function recevoirDegats($degats) {
+        $this->sante -= $degats;
+    }
+}
+
+// Classe pour les monstres
+abstract class Monstre extends Personnage {
+    protected $mechancete;
+
+    public function __construct($musculation, $lachete, $inteligence, $endurance, $sante, $mechancete) {
+        parent::__construct($musculation, $lachete, $inteligence, $endurance, $sante);
+        $this->mechancete = $mechancete;
+    }
+
+    abstract public function rugir($hero);
+    abstract public function coupDesalete($hero);
+}
+
+class Ogre extends Monstre {
+    private $arme;
+
+    public function __construct() {
+        parent::__construct(10, 3, 0, 100, 100, 12);
+        $this->arme = 15;
+    }
+
+    public function rugir($hero) {
+        $hero->recevoirDegats(5);
+    }
+
+    public function coupDesalete($hero) {
+        $hero->recevoirDegats(15);
+    }
+}
+
+class Lutin extends Monstre {
+    private $salete;
+
+    public function __construct() {
+        parent::__construct(8, 10, 0, 100, 100, 8);
+        $this->salete = 15;
+    }
+
+    public function rugir($hero) {
+        $hero->recevoirDegats(10);
+    }
+
+    public function coupDesalete($hero) {
+        $hero->recevoirDegats(4);
+    }
+}
+
+// Classe pour les héros
+abstract class Hero extends Personnage {
+    protected $epee;
+
+    public function __construct($musculation, $lachete, $inteligence, $endurance, $sante, $epee) {
+        parent::__construct($musculation, $lachete, $inteligence, $endurance, $sante);
+        $this->epee = $epee;
+    }
+
+    abstract public function gifle($monstre);
+    abstract public function coupspecial($monstre);
+}
+
+class Chevalier extends Hero {
+    public function __construct() {
+        parent::__construct(15, 5, 8, 100, 100, 12);
+    }
+
+    public function gifle($monstre) {
+        $monstre->recevoirDegats(15);
+    }
+
+    public function coupspecial($monstre) {
+        $monstre->recevoirDegats(8);
+    }
+}
+
+class Princesse extends Hero {
+    public function __construct() {
+        parent::__construct(6, 2, 15, 120, 100, 6);
+    }
+
+    public function gifle($monstre) {
+        $monstre->recevoirDegats(10);
+    }
+
+    public function coupspecial($monstre) {
+        $monstre->recevoirDegats(12);
+    }
+}
+
+// Exemple d'utilisation
+$chevalier = new Chevalier();
+$ogre = new Ogre();
+
+echo "Début du combat : Chevalier vs Ogre\n";
+
+while ($chevalier->estVivant() && $ogre->estVivant()) {
+    $chevalier->gifle($ogre);
+    if (!$ogre->estVivant()) {
+        echo "L'ogre est mort. Le chevalier a gagné !\n";
+        break;
+    }
+
+    $ogre->coupDesalete($chevalier);
+    if (!$chevalier->estVivant()) {
+        echo "Le chevalier est mort. L'ogre a gagné !\n";
+        break;
+    }
+}
+?>
